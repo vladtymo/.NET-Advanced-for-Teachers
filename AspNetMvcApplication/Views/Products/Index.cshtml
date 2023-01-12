@@ -1,0 +1,38 @@
+﻿@model List<DataAccess.Product>;
+
+<h1>Product List</h1>
+
+@if(!Model.Any()) 
+{
+    <p>Product list is empty!</p>
+}
+else
+{
+    @*<ul>
+        @foreach (var p in Model)
+        {
+            <li>Product @p.Id: @p.Name @p.Price$</li>
+        }
+    </ul>*@
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <th scope="row">@p.Id</th>
+                    <td>@p.Name</td>
+                    <td>@p.Price$</td>
+                    <td>@*@p.Category.Name*@</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
