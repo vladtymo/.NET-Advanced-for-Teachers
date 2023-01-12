@@ -1,12 +1,8 @@
 ﻿@model List<DataAccess.Product>;
 
-<h1>Product List</h1>
+<h1 class="text-center">Product List</h1>
 
-@if(!Model.Any()) 
-{
-    <p>Product list is empty!</p>
-}
-else
+@if(Model.Any()) 
 {
     @*<ul>
         @foreach (var p in Model)
@@ -14,7 +10,7 @@ else
             <li>Product @p.Id: @p.Name @p.Price$</li>
         }
     </ul>*@
-    <table class="table table-striped">
+    <table class="table table-striped table-hover mt-4">
         <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -30,9 +26,13 @@ else
                     <th scope="row">@p.Id</th>
                     <td>@p.Name</td>
                     <td>@p.Price$</td>
-                    <td>@*@p.Category.Name*@</td>
+                    <td>TODO:)</td>
                 </tr>
             }
         </tbody>
     </table>
+}
+else
+{
+    <p>Product list is empty!</p>
 }

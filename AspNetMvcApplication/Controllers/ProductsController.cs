@@ -15,8 +15,10 @@ namespace AspNetMvcApplication.Controllers
         public IActionResult Index()
         {
             // get products from DB
+            var products = context.Products.ToList();
 
-            return View(context.Products.ToList());
+            // put them to the View
+            return View(products); 
         }
     }
 }
