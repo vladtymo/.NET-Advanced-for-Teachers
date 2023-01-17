@@ -35,7 +35,7 @@ namespace AspNetMvcApplication.Controllers
 
         // POST: ~/Products/Create
         [HttpPost]
-        public IActionResult Create([FromForm] Product product)
+        public IActionResult Create(Product product)
         {
             // TODO: add validations
 
@@ -46,6 +46,8 @@ namespace AspNetMvcApplication.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        // TODO: Edit Action
 
         public IActionResult Delete(int id)
         {

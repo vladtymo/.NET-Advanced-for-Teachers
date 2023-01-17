@@ -31,7 +31,10 @@
                     <td>@p.Price$</td>
                     <td>@(p.Category?.Name ?? "No Category")</td>
                     <td>
-                        <a asp-action="Delete" asp-route-id=@p.Id class="btn btn-danger">Delete</a>
+                        <div class="btn-group">
+                            <a asp-action="Edit" asp-route-id=@p.Id class="btn btn-warning">Edit</a>
+                            <a asp-action="Delete" asp-route-id=@p.Id class="btn btn-danger">Delete</a>
+                        </div>
                     </td>
                 </tr>
             }
