@@ -2,6 +2,8 @@
 
 <h1 class="text-center">Product List</h1>
 
+<a asp-action="Create" class="btn btn-primary">Create New Product</a>
+
 @if(Model.Any()) 
 {
     @*<ul>
@@ -17,6 +19,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
                 <th scope="col">Category</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -26,7 +29,10 @@
                     <th scope="row">@p.Id</th>
                     <td>@p.Name</td>
                     <td>@p.Price$</td>
-                    <td>TODO:)</td>
+                    <td>@(p.Category?.Name ?? "No Category")</td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id=@p.Id class="btn btn-danger">Delete</a>
+                    </td>
                 </tr>
             }
         </tbody>
