@@ -1,4 +1,5 @@
-﻿using DataAccess;
+﻿using BussinesLogic.Interfaces;
+using DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -7,29 +8,29 @@ namespace AspNetMvcApplication.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly MyAppDbContext context;
+        private readonly IProductsService productsService;
 
-        public ProductsController(MyAppDbContext context)
+        public ProductsController(IProductsService productsService)
         {
-            this.context = context;
+            this.productsService = productsService;
+        }
+
+        private void LoadCategories()
+        {
+            //ViewData["CategoryList"] = null;
+            ViewBag.CategoryList = new SelectList(productsService.GetAllCategories(), nameof(Category.Id), nameof(Category.Name));
         }
 
         public IActionResult Index()
         {
-            // get products from DB
-            // Include() - LEFT JOIN
-            var products = context.Products.Include(x => x.Category).ToList();
-
             // put them to the View
-            return View(products); 
+            return View(productsService.GetAll());
         }
         
         // GET: ~/Products/Create
         public IActionResult Create()
         {
-            //ViewData["CategoryList"] = null;
-            ViewBag.CategoryList = new SelectList(context.Categories.ToList(), nameof(Category.Id), nameof(Category.Name));
-        
+            LoadCategories();
             return View();
         }
 
@@ -39,26 +40,37 @@ namespace AspNetMvcApplication.Controllers
         {
             // TODO: add validations
 
-            // create product in db
-            context.Products.Add(product);
-
-            context.SaveChanges(); // submit changes in db
+            productsService.Create(product);
 
             return RedirectToAction(nameof(Index));
         }
 
-        // TODO: Edit Action
-
-        public IActionResult Delete(int id)
+        // GET: ~/Products/Edit/{id}
+        public IActionResult Edit(int id)
         {
-            if (id < 0) return BadRequest();
-
-            var product = context.Products.Find(id);
+            var product = productsService.Get(id);
 
             if (product == null) return NotFound();
 
-            context.Products.Remove(product);
-            context.SaveChanges();
+            LoadCategories();
+            return View(product);
+        }
+
+        // POST: ~/Products/Edit
+        [HttpPost]
+        public IActionResult Edit(Product product) // 1-FromForm, 2-FromRoute, 
+        {
+            // TODO: add validations
+
+            productsService.Update(product);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        // GET: ~/Products/Delete/{id}
+        public IActionResult Delete(int id)
+        {
+            productsService.Delete(id);
 
             return RedirectToAction(nameof(Index));
         }

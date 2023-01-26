@@ -1,6 +1,8 @@
-﻿namespace DataAccess
+﻿using DataAccess.Interfaces;
+
+namespace DataAccess
 {
-    public class Product
+    public class Product : IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

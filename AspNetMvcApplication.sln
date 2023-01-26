@@ -5,7 +5,9 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetMvcApplication", "AspNetMvcApplication\AspNetMvcApplication.csproj", "{19112051-3C73-4576-A719-87471BCCD6D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{C32B1538-D413-4A4A-B425-A0189953A7BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{C32B1538-D413-4A4A-B425-A0189953A7BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BussinesLogic", "BussinesLogic\BussinesLogic.csproj", "{244E4158-69DB-4C11-BE51-0E48384A7712}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{C32B1538-D413-4A4A-B425-A0189953A7BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C32B1538-D413-4A4A-B425-A0189953A7BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C32B1538-D413-4A4A-B425-A0189953A7BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{244E4158-69DB-4C11-BE51-0E48384A7712}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{244E4158-69DB-4C11-BE51-0E48384A7712}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{244E4158-69DB-4C11-BE51-0E48384A7712}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{244E4158-69DB-4C11-BE51-0E48384A7712}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
