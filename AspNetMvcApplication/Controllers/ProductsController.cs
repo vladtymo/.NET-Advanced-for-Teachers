@@ -1,8 +1,7 @@
-﻿using BussinesLogic.Interfaces;
-using DataAccess;
+﻿using Core.Entities;
+using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 
 namespace AspNetMvcApplication.Controllers
 {

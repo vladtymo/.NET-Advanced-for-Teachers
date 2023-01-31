@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BussinesLogic\BussinesLogic.csproj" />
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
+    <ProjectReference Include="..\BussinesLogic\ApplicationCore.csproj" />
+    <ProjectReference Include="..\DataAccess\Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

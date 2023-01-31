@@ -1,7 +1,5 @@
-using BussinesLogic.Interfaces;
-using BussinesLogic.Services;
-using DataAccess;
-using DataAccess.Interfaces;
+using ApplicationCore;
+using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,11 +9,11 @@ string connStr = builder.Configuration.GetConnectionString("LocalDb");
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<MyAppDbContext>(opt => opt.UseSqlServer(connStr));
+builder.Services.AddDbContext(connStr);
+builder.Services.AddRepositories();
 
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 // service configurations
-builder.Services.AddScoped<IProductsService, ProductsService>();
+builder.Services.AddCustomServices();
 
 var app = builder.Build();
 

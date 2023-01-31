@@ -1,11 +1,6 @@
-﻿using DataAccess;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Entities;
 
-namespace BussinesLogic.Interfaces
+namespace Core.Interfaces
 {
     public interface IProductsService
     {

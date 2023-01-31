@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess
 {
-    public class MyAppDbContext : DbContext
+    internal class MyAppDbContext : DbContext
     {
         public MyAppDbContext() : base() { }
         public MyAppDbContext(DbContextOptions options) : base(options) { }

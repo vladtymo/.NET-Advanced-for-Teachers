@@ -1,6 +1,6 @@
-﻿using DataAccess.Interfaces;
+﻿using Core.Interfaces;
 
-namespace DataAccess
+namespace Core.Entities
 {
     public class Product : IEntity
     {
