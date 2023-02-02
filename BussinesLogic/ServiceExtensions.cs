@@ -7,13 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationCore
+namespace Core
 {
     public static class ServiceExtensions
     {
         public static void AddCustomServices(this IServiceCollection services)
         {
             services.AddScoped<IProductsService, ProductsService>();
+        }
+
+        public static void AddAutoMapper(this IServiceCollection services)
+        {
+            services.AddAutoMapper(typeof(AppProfile));
         }
     }
 }

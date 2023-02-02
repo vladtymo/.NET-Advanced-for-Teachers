@@ -1,28 +1,47 @@
-﻿using Core.Entities;
+﻿using Core.DTOs;
+using AutoMapper;
+using Core.Entities;
 using Core.Interfaces;
 
 namespace Core.Services
 {
     public class ProductsService : IProductsService
     {
+        private readonly IMapper mapper;
+
         private readonly IRepository<Product> productRepo;
         private readonly IRepository<Category> categoryRepo;
 
         public ProductsService(IRepository<Product> productRepo,
-                               IRepository<Category> categoryRepo)
+                               IRepository<Category> categoryRepo,
+                               IMapper mapper)
         {
             this.productRepo = productRepo;
             this.categoryRepo = categoryRepo;
+            this.mapper = mapper;
         }
 
-        public List<Product> GetAll()
+        public List<ProductDto> GetAll()
         {
             // get products from DB
             // Include() - LEFT JOIN
-            return productRepo.Get(includeProperties: "Category").ToList();
+            var result = productRepo.Get().ToList();
+            return mapper.Map<List<ProductDto>>(result);
+
+            //foreach (var i in result)
+            //{
+            //    yield return new ProductDto()
+            //    {
+            //        Id = i.Id,
+            //        Name = i.Name,
+            //        Price = i.Price,
+            //        CategoryId = i.CategoryId,
+            //        CategoryName = i.Category?.Name ?? "not loaded"
+            //    };
+            //}
         }
 
-        public Product? Get(int id)
+        public ProductDto? Get(int id)
         {
             if (id < 0) return null; // exception handling
 
@@ -30,19 +49,27 @@ namespace Core.Services
 
             if (product == null) return null; // exception handling
 
-            return product;
+            return mapper.Map<ProductDto>(product);
+            //return new ProductDto()
+            //{
+            //    Id = product.Id,
+            //    Name = product.Name,
+            //    Price = product.Price,
+            //    CategoryId = product.CategoryId,
+            //    CategoryName = product.Category?.Name ?? "not loaded" 
+            //};
         }
 
-        public void Create(Product product)
+        public void Create(ProductDto dto)
         {
             // create product in db
-            productRepo.Insert(product);
+            productRepo.Insert(mapper.Map<Product>(dto));
             productRepo.Save(); // submit changes in db
         }
 
-        public void Update(Product product)
+        public void Update(ProductDto dto)
         {
-            productRepo.Update(product);
+            productRepo.Update(mapper.Map<Product>(dto));
             productRepo.Save();
         }
 
@@ -56,9 +83,9 @@ namespace Core.Services
             productRepo.Save();
         }
 
-        public List<Category> GetAllCategories()
+        public List<CategoryDto> GetAllCategories()
         {
-            return categoryRepo.Get().ToList();
+            return mapper.Map<List<CategoryDto>>(categoryRepo.Get().ToList());
         }
     }
 }

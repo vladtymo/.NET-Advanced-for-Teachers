@@ -1,4 +1,4 @@
-using ApplicationCore;
+using Core;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +11,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext(connStr);
 builder.Services.AddRepositories();
+builder.Services.AddAutoMapper();
 
 // service configurations
 builder.Services.AddCustomServices();

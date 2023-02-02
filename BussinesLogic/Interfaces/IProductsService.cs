@@ -1,14 +1,15 @@
-﻿using Core.Entities;
+﻿using Core.DTOs;
+using Core.Entities;
 
 namespace Core.Interfaces
 {
     public interface IProductsService
     {
-        List<Product> GetAll();
-        List<Category> GetAllCategories();
-        Product? Get(int id);
-        void Create(Product product);
-        void Update(Product product);
+        List<ProductDto> GetAll();
+        List<CategoryDto> GetAllCategories();
+        ProductDto? Get(int id);
+        void Create(ProductDto product);
+        void Update(ProductDto product);
         void Delete(int id);
     }
 }

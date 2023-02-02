@@ -1,4 +1,5 @@
-﻿using Core.Entities;
+﻿using Core.DTOs;
+using Core.Entities;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -17,7 +18,7 @@ namespace AspNetMvcApplication.Controllers
         private void LoadCategories()
         {
             //ViewData["CategoryList"] = null;
-            ViewBag.CategoryList = new SelectList(productsService.GetAllCategories(), nameof(Category.Id), nameof(Category.Name));
+            ViewBag.CategoryList = new SelectList(productsService.GetAllCategories(), nameof(CategoryDto.Id), nameof(CategoryDto.Name));
         }
 
         public IActionResult Index()
@@ -35,7 +36,7 @@ namespace AspNetMvcApplication.Controllers
 
         // POST: ~/Products/Create
         [HttpPost]
-        public IActionResult Create(Product product)
+        public IActionResult Create(ProductDto product)
         {
             // TODO: add validations
 
@@ -57,7 +58,7 @@ namespace AspNetMvcApplication.Controllers
 
         // POST: ~/Products/Edit
         [HttpPost]
-        public IActionResult Edit(Product product) // 1-FromForm, 2-FromRoute, 
+        public IActionResult Edit(ProductDto product) // 1-FromForm, 2-FromRoute, 
         {
             // TODO: add validations
 
