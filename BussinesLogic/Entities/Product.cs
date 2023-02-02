@@ -4,6 +4,7 @@ namespace Core.Entities
 {
     public class Product : IEntity
     {
+        // Primary key naming: Id id ID EntityName+Id
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }

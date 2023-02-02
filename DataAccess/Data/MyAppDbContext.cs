@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Infrastructure.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess
@@ -14,6 +15,9 @@ namespace DataAccess
 
             modelBuilder.SeedCategories();
             modelBuilder.SeedProducts();
+
+            // ---------------- apply Fuent API configurations
+            modelBuilder.ApplyConfiguration(new ProductConfigs());
         }
 
         // ----------------------- Collections
