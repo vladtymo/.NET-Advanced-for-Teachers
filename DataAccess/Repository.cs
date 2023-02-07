@@ -23,7 +23,7 @@ namespace DataAccess
         public virtual IEnumerable<TEntity> Get(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            string includeProperties = "")
+            params string[] includeProperties)
         {
             IQueryable<TEntity> query = dbSet;
 
@@ -32,8 +32,7 @@ namespace DataAccess
                 query = query.Where(filter);
             }
 
-            foreach (var includeProperty in includeProperties.Split
-                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var includeProperty in includeProperties)
             {
                 query = query.Include(includeProperty);
             }

@@ -13,7 +13,12 @@ namespace Core
     {
         public static void AddCustomServices(this IServiceCollection services)
         {
+            // Singleton - objects are the same for every object and every request.
+
+            // Scoped: bjects are the same within a request, but different across different requests.
             services.AddScoped<IProductsService, ProductsService>();
+
+            // Transient - objects are always different; a new instance is provided to every controller and every service.
         }
 
         public static void AddAutoMapper(this IServiceCollection services)

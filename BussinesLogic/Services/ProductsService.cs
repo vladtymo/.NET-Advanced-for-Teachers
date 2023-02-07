@@ -25,7 +25,7 @@ namespace Core.Services
         {
             // get products from DB
             // Include() - LEFT JOIN
-            var result = productRepo.Get().ToList();
+            var result = productRepo.Get(includeProperties: new[] { nameof(Product.Category) }).ToList();
             return mapper.Map<List<ProductDto>>(result);
 
             //foreach (var i in result)
