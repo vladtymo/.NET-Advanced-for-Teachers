@@ -3,6 +3,7 @@ using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using System.Runtime.CompilerServices;
+using Core.Specifications;
 
 namespace Core.Services
 {
@@ -26,7 +27,8 @@ namespace Core.Services
         {
             // get products from DB
             // Include() - LEFT JOIN
-            var result = await productRepo.Get(includeProperties: new[] { nameof(Product.Category) });
+            //var result = await productRepo.Get(includeProperties: new[] { nameof(Product.Category)});
+            var result = await productRepo.GetListBySpec(new Products.All());
             return mapper.Map<List<ProductDto>>(result);
 
             //foreach (var i in result)
@@ -86,7 +88,13 @@ namespace Core.Services
 
         public async Task<List<CategoryDto>> GetAllCategories()
         {
-            return mapper.Map<List<CategoryDto>>(await categoryRepo.Get());
+            return mapper.Map<List<CategoryDto>>(await categoryRepo.GetAll());
+        }
+
+        public async Task<List<ProductDto>> GetByPrice(decimal from, decimal to)
+        {
+            var result = await productRepo.GetListBySpec(new Products.ByPrice(from, to));
+            return mapper.Map<List<ProductDto>>(result);
         }
     }
 }

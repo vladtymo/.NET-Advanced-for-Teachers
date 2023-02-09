@@ -11,5 +11,6 @@ namespace Core.Interfaces
         Task Create(ProductDto product);
         Task Update(ProductDto product);
         Task Delete(int id);
+        Task<List<ProductDto>> GetByPrice(decimal from, decimal to);
     }
 }
