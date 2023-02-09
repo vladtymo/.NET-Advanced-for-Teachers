@@ -5,11 +5,11 @@ namespace Core.Interfaces
 {
     public interface IProductsService
     {
-        List<ProductDto> GetAll();
-        List<CategoryDto> GetAllCategories();
-        ProductDto? Get(int id);
-        void Create(ProductDto product);
-        void Update(ProductDto product);
-        void Delete(int id);
+        Task<List<ProductDto>> GetAll();
+        Task<List<CategoryDto>> GetAllCategories();
+        Task<ProductDto?> Get(int id);
+        Task Create(ProductDto product);
+        Task Update(ProductDto product);
+        Task Delete(int id);
     }
 }

@@ -15,62 +15,62 @@ namespace AspNetMvcApplication.Controllers
             this.productsService = productsService;
         }
 
-        private void LoadCategories()
+        private async Task LoadCategories()
         {
             //ViewData["CategoryList"] = null;
-            ViewBag.CategoryList = new SelectList(productsService.GetAllCategories(), nameof(CategoryDto.Id), nameof(CategoryDto.Name));
+            ViewBag.CategoryList = new SelectList(await productsService.GetAllCategories(), nameof(CategoryDto.Id), nameof(CategoryDto.Name));
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             // put them to the View
-            return View(productsService.GetAll());
+            return View(await productsService.GetAll());
         }
         
         // GET: ~/Products/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            LoadCategories();
+            await LoadCategories();
             return View();
         }
 
         // POST: ~/Products/Create
         [HttpPost]
-        public IActionResult Create(ProductDto product)
+        public async Task<IActionResult> Create(ProductDto product)
         {
             // TODO: add validations
 
-            productsService.Create(product);
+            await productsService.Create(product);
 
             return RedirectToAction(nameof(Index));
         }
 
         // GET: ~/Products/Edit/{id}
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var product = productsService.Get(id);
+            var product = await productsService.Get(id);
 
             if (product == null) return NotFound();
 
-            LoadCategories();
+            await LoadCategories();
             return View(product);
         }
 
         // POST: ~/Products/Edit
         [HttpPost]
-        public IActionResult Edit(ProductDto product) // 1-FromForm, 2-FromRoute, 
+        public async Task<IActionResult> Edit(ProductDto product) // 1-FromForm, 2-FromRoute, 
         {
             // TODO: add validations
 
-            productsService.Update(product);
+            await productsService.Update(product);
 
             return RedirectToAction(nameof(Index));
         }
 
         // GET: ~/Products/Delete/{id}
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            productsService.Delete(id);
+            await productsService.Delete(id);
 
             return RedirectToAction(nameof(Index));
         }

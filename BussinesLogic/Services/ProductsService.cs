@@ -2,6 +2,7 @@
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
+using System.Runtime.CompilerServices;
 
 namespace Core.Services
 {
@@ -21,11 +22,11 @@ namespace Core.Services
             this.mapper = mapper;
         }
 
-        public List<ProductDto> GetAll()
+        public async Task<List<ProductDto>> GetAll()
         {
             // get products from DB
             // Include() - LEFT JOIN
-            var result = productRepo.Get(includeProperties: new[] { nameof(Product.Category) }).ToList();
+            var result = await productRepo.Get(includeProperties: new[] { nameof(Product.Category) });
             return mapper.Map<List<ProductDto>>(result);
 
             //foreach (var i in result)
@@ -41,11 +42,11 @@ namespace Core.Services
             //}
         }
 
-        public ProductDto? Get(int id)
+        public async Task<ProductDto?> Get(int id)
         {
             if (id < 0) return null; // exception handling
 
-            var product = productRepo.GetByID(id);
+            var product = await productRepo.GetByID(id);
 
             if (product == null) return null; // exception handling
 
@@ -60,32 +61,32 @@ namespace Core.Services
             //};
         }
 
-        public void Create(ProductDto dto)
+        public async Task Create(ProductDto dto)
         {
             // create product in db
-            productRepo.Insert(mapper.Map<Product>(dto));
-            productRepo.Save(); // submit changes in db
+            await productRepo.Insert(mapper.Map<Product>(dto));
+            await productRepo.Save(); // submit changes in db
         }
 
-        public void Update(ProductDto dto)
+        public async Task Update(ProductDto dto)
         {
-            productRepo.Update(mapper.Map<Product>(dto));
-            productRepo.Save();
+            await productRepo.Update(mapper.Map<Product>(dto));
+            await productRepo.Save();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var product = Get(id);
+            var product = await Get(id);
 
             if (product == null) return; // exception
 
-            productRepo.Delete(id);
-            productRepo.Save();
+            await productRepo.Delete(id);
+            await productRepo.Save();
         }
 
-        public List<CategoryDto> GetAllCategories()
+        public async Task<List<CategoryDto>> GetAllCategories()
         {
-            return mapper.Map<List<CategoryDto>>(categoryRepo.Get().ToList());
+            return mapper.Map<List<CategoryDto>>(await categoryRepo.Get());
         }
     }
 }
