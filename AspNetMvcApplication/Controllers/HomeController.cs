@@ -1,4 +1,5 @@
 ﻿using AspNetMvcApplication.Models;
+using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,17 +7,17 @@ namespace AspNetMvcApplication.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IProductsService productService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IProductsService productService)
         {
-            _logger = logger;
+            this.productService = productService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            // code...
-            return View(); // ~/Views/Home/Index.cshtml
+            var products = await productService.GetAll();
+            return View(products); // ~/Views/Home/Index.cshtml
         }
 
         public IActionResult Privacy()

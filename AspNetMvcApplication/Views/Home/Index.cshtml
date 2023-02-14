@@ -1,4 +1,13 @@
-﻿<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+﻿@model List<Core.DTOs.ProductDto>;
+
+<div class="text-center">
+    <h1 class="display-4">Product Catalog</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var item in Model)
+    {
+        <partial name="_ProductCardPartial" model="@item" />
+    }
 </div>
