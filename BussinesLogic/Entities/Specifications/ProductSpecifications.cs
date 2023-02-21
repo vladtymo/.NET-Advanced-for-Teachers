@@ -23,5 +23,15 @@ namespace Core.Specifications
                     .Include(x => x.Category);
             }
         }
+
+        public class ByIds : Specification<Product>
+        {
+            public ByIds(int[] ids)
+            {
+                Query
+                    .Where(x => ids.Contains(x.Id))
+                    .Include(x => x.Category);
+            }
+        }
     }
 }

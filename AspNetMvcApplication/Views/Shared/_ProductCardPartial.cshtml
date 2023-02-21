@@ -9,6 +9,7 @@
                 @Model.CategoryName
                 @Model.Price$
             </p>
+            <a asp-controller="Cart" asp-action="Add" asp-route-productId="@Model.Id" class="btn btn-outline-primary">Add to Cart</a>
         </div>
     </div>
 </div>

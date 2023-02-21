@@ -23,6 +23,12 @@ namespace Core.Services
             this.mapper = mapper;
         }
 
+        public async Task<List<ProductDto>> Get(params int[] ids)
+        {
+            var result = await productRepo.GetListBySpec(new Products.ByIds(ids));
+            return mapper.Map<List<ProductDto>>(result);
+        }
+
         public async Task<List<ProductDto>> GetAll()
         {
             // get products from DB

@@ -8,6 +8,7 @@ namespace Core.Interfaces
         Task<List<ProductDto>> GetAll();
         Task<List<CategoryDto>> GetAllCategories();
         Task<ProductDto?> Get(int id);
+        Task<List<ProductDto>> Get(params int[] ids);
         Task Create(ProductDto product);
         Task Update(ProductDto product);
         Task Delete(int id);
