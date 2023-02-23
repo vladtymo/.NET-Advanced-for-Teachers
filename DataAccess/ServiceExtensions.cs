@@ -1,5 +1,7 @@
-﻿using Core.Interfaces;
+﻿using Core.Entities;
+using Core.Interfaces;
 using DataAccess;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,6 +17,12 @@ namespace Infrastructure
         public static void AddDbContext(this IServiceCollection services, string connectionString)
         {
             services.AddDbContext<MyAppDbContext>(opt => opt.UseSqlServer(connectionString));
+        }
+
+        public static void AddIdentity(this IServiceCollection services)
+        {
+            services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<MyAppDbContext>();
         }
 
         public static void AddRepositories(this IServiceCollection services)
