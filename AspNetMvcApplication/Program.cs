@@ -3,6 +3,9 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using DataAccess;
+using Core.Interfaces;
+using Core.Entities;
+using AspNetMvcApplication.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +33,15 @@ builder.Services.AddSession(options =>
 });
 
 var app = builder.Build();
+
+// seed roles and admin user
+using(var scope = app.Services.CreateScope())
+{
+    var provider = scope.ServiceProvider;
+
+    Seeder.SeedRoles(provider).Wait();
+    Seeder.SeedAdminUser(provider).Wait();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

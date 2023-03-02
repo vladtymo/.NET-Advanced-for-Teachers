@@ -16,11 +16,12 @@ namespace DataAccess
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.SeedCategories();
-            modelBuilder.SeedProducts();
-
             // ---------------- apply Fuent API configurations
             modelBuilder.ApplyConfiguration(new ProductConfigs());
+
+            // ---------------- database initialization
+            modelBuilder.SeedCategories();
+            modelBuilder.SeedProducts();
         }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)

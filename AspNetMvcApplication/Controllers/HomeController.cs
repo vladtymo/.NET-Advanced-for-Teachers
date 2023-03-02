@@ -1,5 +1,6 @@
 ﻿using AspNetMvcApplication.Models;
 using Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -20,6 +21,7 @@ namespace AspNetMvcApplication.Controllers
             return View(products); // ~/Views/Home/Index.cshtml
         }
 
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();

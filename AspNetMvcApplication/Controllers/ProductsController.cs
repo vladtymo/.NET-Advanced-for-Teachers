@@ -1,11 +1,15 @@
-﻿using Core.DTOs;
+﻿using AspNetMvcApplication.Helpers;
+using Core.DTOs;
 using Core.Entities;
 using Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AspNetMvcApplication.Controllers
 {
+    //[Authorize] // can access by authorized user only
+    [Authorize(Roles = "Admin")]
     public class ProductsController : Controller
     {
         private readonly IProductsService productsService;
@@ -21,6 +25,7 @@ namespace AspNetMvcApplication.Controllers
             ViewBag.CategoryList = new SelectList(await productsService.GetAllCategories(), nameof(CategoryDto.Id), nameof(CategoryDto.Name));
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             // put them to the View

@@ -21,7 +21,9 @@ namespace Infrastructure
 
         public static void AddIdentity(this IServiceCollection services)
         {
-            services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<User, IdentityRole>()
+                .AddDefaultTokenProviders()
+                .AddDefaultUI()
                 .AddEntityFrameworkStores<MyAppDbContext>();
         }
 
